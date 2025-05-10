@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap');
+        
+        :root {
+            --primary-color: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #0f766e;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f1f5f9;
+            --white: #ffffff;
+            --accent: #f97316;
+            --success: #10b981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background-color: #e2e8f0;
+            padding: 20px;
+        }
+        
+        .cv-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--white);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: linear-gradient(125deg, #1e40af, #1e3a8a);
+            color: var(--white);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 20% 150%, rgba(255,255,255,0.12) 0%, transparent 40%),
+                             radial-gradient(circle at 80% 50%, rgba(255,255,255,0.08) 0%, transparent 30%);
+            z-index: 1;
+        }
+        
+        .profile-info {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .name {
+            font-family: 'Cairo', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            color: var(--white);
+        }
+        
+        .title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #bfdbfe;
+            margin-bottom: 24px;
+            padding: 4px 15px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(255,255,255,0.1);
+            padding: 8px 15px;
+            border-radius: 50px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-3px);
+            background-color: rgba(255,255,255,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .profile-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid rgba(255,255,255,0.2);
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            background: linear-gradient(45deg, var(--primary-light), var(--primary-dark));
+            padding: 3px;
+        }
+        
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        /* Content Styles */
+        .main-content {
+            display: flex;
+            position: relative;
+        }
+        
+        .divider {
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-light), var(--secondary-color), var(--primary-dark));
+            position: relative;
+        }
+        
+        .divider::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .right-column, .left-column {
+            flex: 1;
+            padding: 35px;
+        }
+        
+        .right-column {
+            background-color: var(--white);
+            position: relative;
+        }
+        
+        .left-column {
+            background-color: var(--bg-light);
+            position: relative;
+        }
+        
+        .left-column::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-light), transparent);
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-light), transparent);
+            border-radius: 3px;
+        }
+        
+        /* Education & Experience Items */
+        .education-item, .experience-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: var(--white);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .left-column .education-item,
+        .left-column .experience-item {
+            background-color: var(--white);
+        }
+        
+        .right-column .education-item,
+        .right-column .experience-item {
+            background-color: var(--bg-light);
+        }
+        
+        .education-item:hover, .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        
+        .education-item::before, .experience-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .edu-degree, .exp-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+        
+        .edu-school, .exp-company {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .date {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            padding: 4px 12px;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-radius: 30px;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        
+        /* Skills Section */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 0;
+            list-style-type: none;
+        }
+        
+        .skill-item {
+            background: var(--white);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            font-weight: 500;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+            color: var(--white);
+            border-color: transparent;
+        }
+        
+        /* Activities & Certifications */
+        .activities-list, .certifications-list {
+            padding: 0;
+            list-style-type: none;
+        }
+        
+        .activities-list li, .certifications-list li {
+            position: relative;
+            padding-right: 28px;
+            margin-bottom: 18px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        
+        .activities-list li:last-child, .certifications-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .activities-list li:before, .certifications-list li:before {
+            content: "◆";
+            position: absolute;
+            right: 0;
+            color: var(--primary-light);
+            font-weight: bold;
+        }
+        
+        .certifications-list li:before {
+            content: "✓";
+            color: var(--success);
+        }
+        
+        /* Nested Lists */
+        .nested-list {
+            padding-right: 25px;
+            margin-top: 12px;
+            list-style-type: disc;
+            color: var(--text-light);
+        }
+        
+        /* Additional Grade Info */
+        .grade-info {
+            margin-top: 12px;
+            font-weight: 500;
+        }
+        
+        .highlight {
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .left-column::before {
+                width: 100%;
+                height: 1px;
+                top: 0;
+                right: 0;
+                background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+            }
+            
+            .header {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            
+            .profile-photo {
+                margin-bottom: 25px;
+                width: 140px;
+                height: 140px;
+            }
+            
+            .contact-info {
+                justify-content: center;
+            }
+            
+            .right-column, .left-column {
+                padding: 25px 20px;
+            }
+        }
+        
+        @media print {
+    /* إعدادات أساسية للطباعة - تعظيم استخدام المساحة */
+    body {
+        background-color: white;
+        padding: 0;
+        margin: 0;
+        font-size: 11pt; /* تصغير حجم الخط قليلاً لتوفير مساحة */
+        line-height: 1.4;
+        color: #000;
+    }
+    
+    .cv-container {
+        box-shadow: none;
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* تقليص التباعد في الرأس لاستغلال المساحة */
+    .header {
+        background: #f0efef !important;
+        color: #000 !important;
+        padding: 15px !important;
+        page-break-after: avoid;
+    }
+    
+    /* تقليل حجم الصورة الشخصية */
+    .profile-photo {
+        width: 120px !important;
+        height: 120px !important;
+        background: none !important;
+    
+    }
+    
+    /* تقليص المسافة بين الاسم والعنوان الوظيفي */
+    .name {
+        font-size: 24pt !important;
+        margin-bottom: 2px !important;
+        color: #000 !important;
+    }
+    
+    .title {
+        font-size: 14pt !important;
+        margin-bottom: 10px !important;
+        background-color: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        color: #2137ca !important;
+    }
+    
+    /* تقليص المساحات في معلومات الاتصال */
+    .contact-info {
+        gap: 8px !important;
+        margin-top: 10px !important;
+    }
+    
+    .contact-item {
+        padding: 4px 10px !important;
+        background-color: transparent !important;
+        border: none !important;
+        font-size: 9pt !important;
+    }
+    
+    /* تعديل المحتوى الرئيسي ليناسب الصفحة */
+    .main-content {
+        display: flex !important;
+        flex-direction: row !important;
+    }
+    
+    .left-column, .right-column {
+        background-color: #fff !important;
+        padding: 12px 15px !important; /* تقليل الهوامش الداخلية */
+    }
+    
+    /* تقليص المساحات للأقسام */
+    .section {
+        margin-bottom: 15px !important;
+        page-break-inside: avoid;
+    }
+    
+    .section-title {
+        font-size: 14pt !important;
+        margin-bottom: 10px !important;
+        padding-bottom: 5px !important;
+    }
+    
+    /* تقليص المساحات للعناصر */
+    .education-item, .experience-item {
+        margin-bottom: 12px !important;
+        padding: 10px !important;
+        page-break-inside: avoid;
+    }
+    
+    .education-item::before, .experience-item::before {
+        width: 3px !important;
+    }
+    
+    .edu-degree, .exp-title {
+        font-size: 12pt !important;
+        margin-bottom: 3px !important;
+    }
+    
+    .edu-school, .exp-company {
+        font-size: 11pt !important;
+        margin-bottom: 3px !important;
+    }
+    
+    .date {
+        font-size: 9pt !important;
+        padding: 2px 8px !important;
+        background-color: transparent !important;
+        border: none !important;
+    }
+    
+    /* تعديل قسم المهارات */
+    .skills-list {
+        gap: 8px !important;
+    }
+    
+    .skill-item {
+        padding: 5px 12px !important;
+        font-size: 9pt !important;
+        background-color: transparent !important;
+        border: 1px solid #eee !important;
+    }
+    
+    /* تقليص المساحات للقوائم */
+    .activities-list li, .certifications-list li {
+        margin-bottom: 8px !important;
+        padding-bottom: 8px !important;
+        padding-right: 20px !important;
+    }
+    
+    .nested-list {
+        padding-right: 15px !important;
+        margin-top: 5px !important;
+    }
+    
+    /* إزالة تأثيرات الحركة والزخرفة */
+    .header::before, .header::after, .divider, .divider::after, 
+    .left-column::before, .animated-gradient {
+        display: none !important;
+    }
+    
+    /* تأكيد عرض المحتوى */
+    * {
+        overflow: visible !important;
+    }
+    
+    /* منع تقسيم العناصر المهمة */
+    .education-item, .experience-item, .section-title {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    /* تعريف الصفحة بدون هوامش */
+    @page {
+        size: A4;
+        margin: 0mm; /* إلغاء الهوامش تمامًا */
+    }
+    
+    /* إضافة هوامش داخلية بسيطة للصفحة بدلاً من هوامش الصفحة */
+    .cv-container {
+        padding: 3mm;
+    }
+    
+    /* تحسين مظهر اللغات بتقليل المساحة */
+    [style*="display: flex; flex-direction: column; gap: 12px"] {
+        gap: 5px !important;
+    }
+    
+    [style*="display: flex; align-items: center; justify-content: space-between"] {
+        margin-bottom: 3px !important;
+    }
+    
+    [style*="width: 60%; height: 8px;"] {
+        height: 5px !important;
+    }
+    
+    /* تعديل المسافات في الأقسام المختلفة حسب المحتوى */
+    .grade-info {
+        margin-top: 5px !important;
+    }
+    
+    /* إزالة أي هوامش زائدة للعناصر الداخلية */
+    p, div, ul, li {
+        margin-top: 0 !important;
+        margin-bottom: 3px !important;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+    <div class="header">
+        <div class="profile-info">
+            <h1 class="name">محمود محمد عبداللاه نصر</h1>
+            <div class="title">بكالوريوس نظم المعلومات الإدارية - مطور ويب (Frontend & PHP)</div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📱</span>
+                    <span>01069715039</span>
+                </div>
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>mahmoud.m.a.1358@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>سوهاج / أخميم، السلاموني</span>
+                </div>
+                <div class="contact-item">
+                    <span>🎂</span>
+                    <span>6/5/2002</span>
+                </div>
+            </div>
+        </div>
+        <div class="profile-photo">
+            <img src="./mm.JPG" alt="صورة شخصية">
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="main-content">
+        <div class="right-column">
+            <div class="section">
+                <h2 class="section-title">المؤهلات التعليمية</h2>
+                <div class="education-item">
+                    <div class="edu-degree">بكالوريوس نظم المعلومات الإدارية</div>
+                    <div class="edu-school">المعهد العالي لنظم التجارة الإلكترونية بسوهاج</div>
+                    <div class="date">2020 - 2024</div>
+                    <div class="grade-info">
+                        <div><span class="highlight">التقدير العام: </span> جيد جدا</div>
+                        <div><span class="highlight">مشروع التخرج:</span> ممتاز - بناء موقع باستخدام PHP وMySQL </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">الخبرات العملية</h2>
+                <div class="experience-item">
+                    <div class="exp-title">قائد مجلس شباب ومنفذ جلسات تنموية</div>
+                    <div class="exp-company">جمعية تنمية المجتمع المحلي بالسلاموني</div>
+                    <div class="date">2020 - حتى الآن</div>
+                    <div style="margin-top: 10px;">
+                        • تنفيذ جلسات تنمية للأطفال حول قضايا المساواة بين النوع الاجتماعي والعادات المجتمعية الخاطئة<br>
+                        • قيادة مجلس شباب لتنفيذ الأنشطة (جلسات – ندوات – عروض مسرحية)<br>
+                        • تنفيذ الأنشطة بالشراكة مع بلان إنترناشيونال إيجبت
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="exp-title"> مكتبة هابي لاند بالكوثر</div>
+                    <div class="exp-company">مكتبة هابي لاند للخدمات الطلابية</div>
+                    <div class="date">2022 - 2024</div>
+                    <div style="margin-top: 10px;">
+                        • استخدام برامج الأوفيس لإعداد الأبحاث<br>
+                        • تنظيم الملفات الرقمية باستخدام الحاسب الآلي<br>
+                        • جميع الخدمات الالكترونية التقديمات علي الانترنت  او الحجوزات
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">المهارات</h2>
+                <ul class="skills-list">
+                    <li class="skill-item">HTML, CSS, JavaScript</li>
+                    <li class="skill-item">PHP, MySQL</li>
+                    <li class="skill-item">Bootstrap</li>
+                    <li class="skill-item"> GitHub</li>
+                    <li class="skill-item">تحليل البيانات</li>
+                    <li class="skill-item">استخدام الحاسب الآلي</li>
+                    <li class="skill-item">تطبيقات الأوفيس</li>
+                    <li class="skill-item">العمل الجماعي</li>
+                    <li class="skill-item">حل المشكلات</li>
+                    <li class="skill-item">القيادة الفعالة</li>
+                    <li class="skill-item">التواصل والاتصال</li>
+                    <li class="skill-item">إدارة الوقت</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="left-column">
+            <div class="section">
+                <h2 class="section-title">الأنشطة والمشاركات</h2>
+                <ul class="activities-list">
+                    <li>قيادة مجلس شباب مجتمعي تابع لهيئة بلان إنترناشيونال</li>
+                    <li>تنفيذ جلسات تنموية للأطفال ومجتمعات محلية حول المساواة والحقوق</li>
+                    <li>تنظيم ندوات وعروض مسرحية للتوعية المجتمعية</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">الشهادات والتدريبات</h2>
+                <ul class="certifications-list">
+                    <li>دورة Frontend (HTML, CSS, Bootstrap, JavaScript) من CREATIVA – NTI – 2024</li>
+                    <li>Effective Leadership – HP Life – 10/8/2024</li>
+                    <li>Basics of Digital Marketing – CIQ – 10/8/2024</li>
+                    <li>برمجة باستخدام PHP وMySQL – مهارة تك – 21/6/2024</li>
+                    <li>أساسيات الحاسب – مهارة تك – 4/7/2023</li>
+                    <li>ICDL من منصة تدريب – 12/10/2021</li>
+                    <li>استراتيجيات استخدام السوشيال ميديا – وزارة التعليم العالي – 8/7/2024</li>
+                    <li>ورشة تسويق رقمي – UNHANCE – 14/10/2023</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
